@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kazakstan — Цифровой музей · Сердце Великой степи</title>
+<meta name="description" content="Kazakstan — цифровой музей и мини-энциклопедия о Казахстане: природа, культура, история и символы земли свободного народа Великой степи.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23D8B461' stroke-width='5' stroke-linecap='round'%3E%3Ccircle cx='50' cy='50' r='34'/%3E%3Ccircle cx='50' cy='50' r='21'/%3E%3Cline x1='50' y1='16' x2='50' y2='84'/%3E%3Cline x1='16' y1='50' x2='84' y2='50'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-mode="night">
+
+<!-- ============ SVG ORNAMENT DEFS ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- қошқар мүйіз · ram-horn divider motif -->
+    <symbol id="orn-ram" viewBox="0 0 46 26">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+        <path d="M23 4 V18"/>
+        <path d="M23 8 C18 8 16 4 12 4 C7 4 5 8 7 12 C9 15 13 14 13 10"/>
+        <path d="M23 8 C28 8 30 4 34 4 C39 4 41 8 39 12 C37 15 33 14 33 10"/>
+        <circle cx="23" cy="20" r="2"/>
+      </g>
+    </symbol>
+    <!-- corner ornament -->
+    <symbol id="orn-corner" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+        <path d="M2 22 V8 C2 4 4 2 8 2 H22"/>
+        <path d="M2 14 C6 14 8 12 8 8 C8 6 9 5 11 5"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ PRELOADER ============ -->
+<div class="preloader" id="preloader">
+  <svg class="mark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+    <circle cx="50" cy="50" r="34" pathLength="1"/>
+    <circle cx="50" cy="50" r="22" pathLength="1"/>
+    <line x1="50" y1="16" x2="50" y2="84" pathLength="1"/>
+    <line x1="16" y1="50" x2="84" y2="50" pathLength="1"/>
+    <path d="M50 28 C40 28 36 20 28 22" pathLength="1"/>
+    <path d="M50 28 C60 28 64 20 72 22" pathLength="1"/>
+    <path d="M50 72 C40 72 36 80 28 78" pathLength="1"/>
+    <path d="M50 72 C60 72 64 80 72 78" pathLength="1"/>
+  </svg>
+  <span class="pl-word">Сандық мұражай · Цифровой музей</span>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="header">
+  <a class="logo" href="#top" aria-label="Kazakstan — на главную">
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+      <circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="21"/>
+      <line x1="50" y1="16" x2="50" y2="84"/><line x1="16" y1="50" x2="84" y2="50"/>
+      <path d="M50 29 C41 29 37 22 30 24"/><path d="M50 29 C59 29 63 22 70 24"/>
+    </svg>
+    <span class="logo-text">
+      <span class="brand">Kazakstan</span>
+      <span class="sub">Цифровой музей · Digital Museum</span>
+    </span>
+  </a>
+
+  <div class="header-tools">
+    <div class="daymode" role="group" aria-label="Режим дня">
+      <button data-set-mode="dawn" aria-pressed="false" title="Рассвет" aria-label="Рассвет">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 4V2M5 11H3M21 11h-2M6 6 4.5 4.5M18 6l1.5-1.5M4 16h16M7 16a5 5 0 0 1 10 0"/></svg>
+      </button>
+      <button data-set-mode="sunset" aria-pressed="false" title="Закат" aria-label="Закат">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M17 18a5 5 0 0 0-10 0M12 9V3l-2.5 2.5M12 3l2.5 2.5M3 18h18M5 21h14"/></svg>
+      </button>
+      <button data-set-mode="night" aria-pressed="true" title="Ночь над Астаной" aria-label="Ночь над Астаной">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M20 14.5A8 8 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5Z"/></svg>
+      </button>
+    </div>
+
+    <button class="tool-btn sound-btn" id="soundBtn" aria-pressed="false">
+      <span class="waves" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+      <span class="lang-full">Ambient</span>
+    </button>
+
+    <a class="tool-btn lang-link" href="#" title="Қазақша нұсқа">
+      <span class="active">RU</span><span class="slash">/</span>QZ
+    </a>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero__bg" id="heroBg"></div>
+  <div class="hero__scrim"></div>
+  <div class="hero__pattern" id="heroPattern"></div>
+
+  <div class="hero__inner">
+    <div class="ornament-divider" data-enter="1">
+      <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+    </div>
+    <h1 data-enter="2">Kazakstan</h1>
+    <p class="tagline" data-enter="3">Сердце Великой степи</p>
+    <div class="hero-cta" data-enter="4">
+      <a href="#nature" class="btn btn--gold">Explore
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#about" class="btn btn--ghost">About</a>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span>Scroll</span><span class="dot"></span>
+  </div>
+</section>
+
+<!-- ============ ABOUT THE NAME ============ -->
+<section class="section section--paper" id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">Значение имени</span>
+      <h2>Qazaq — свободный</h2>
+    </div>
+
+    <div class="name-meaning">
+      <div data-reveal>
+        <p class="pull">«Qazaq» — это «свободный», «независимый» — странник степи, который сам выбирает свой путь и свой горизонт.</p>
+        <p>Слово восходит к тюркскому корню со значением вольности и самостоятельности. Так называли тех, кто отделялся, чтобы жить по собственной воле — кочевников бескрайних равнин, не знавших границ.</p>
+        <p>Отсюда и имя страны: <strong>Казахстан — земля свободного народа Великой степи</strong>. Не территория, очерченная линией на карте, а пространство свободы, унаследованное от тех, кто веками двигался вместе с солнцем и травами.</p>
+      </div>
+      <div class="big-word" data-reveal data-reveal-delay="1">
+        Qazaq
+        <small>сво­бод­ный · неза­ви­си­мый</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COUNTRY INFOBOX ============ -->
+<section class="section section--night" id="country">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">Сердце Евразии</span>
+      <h2>Страна одним взглядом</h2>
+    </div>
+
+    <div class="infobox-grid">
+      <div class="infobox" data-reveal>
+        <div class="infobox__head">
+          <div class="infobox__emblems">
+            <span title="Флаг"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="10" r="3.2"/><path d="M12 13.5c-3 0-5 2-5 4.5h10c0-2.5-2-4.5-5-4.5Z"/><path d="M5 6h14M5 6 7 4M19 6 17 4"/></svg></span>
+            <span title="Шаңырақ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></span>
+          </div>
+          <div>
+            <h3>Республика Казахстан</h3>
+            <span class="native">Qazaqstan Respublikasy</span>
+          </div>
+        </div>
+        <dl>
+          <div class="row"><dt>Столица</dt><dd>Астана</dd></div>
+          <div class="row"><dt>Крупнейший город</dt><dd>Алматы</dd></div>
+          <div class="row"><dt>Население</dt><dd>20+ млн<small>9-я по площади в мире</small></dd></div>
+          <div class="row"><dt>Площадь</dt><dd>2 724 900 км²</dd></div>
+          <div class="row"><dt>Языки</dt><dd>Қазақ · Русский</dd></div>
+          <div class="row"><dt>Регион</dt><dd>Центральная Азия</dd></div>
+          <div class="row"><dt>Часовые пояса</dt><dd>UTC+5</dd></div>
+          <div class="row"><dt>Валюта</dt><dd>Тенге (₸ · KZT)</dd></div>
+          <div class="row"><dt>Домен</dt><dd>.kz</dd></div>
+        </dl>
+      </div>
+
+      <div class="infobox-intro" data-reveal data-reveal-delay="1">
+        <span class="kicker">9-я по площади страна мира</span>
+        <h2>Девятая по площади. Бескрайняя по духу.</h2>
+        <p class="lead">От Каспийского моря на западе до Алтайских гор на востоке Казахстан раскинулся через всю сердцевину Евразии — степи, пустыни, каньоны и снежные хребты на пространстве размером с Западную Европу.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="num">2,7<small style="font-size:.4em">млн км²</small></div><div class="lbl">Площадь территории</div></div>
+          <div class="stat"><div class="num">20<small style="font-size:.4em">млн</small></div><div class="lbl">Население</div></div>
+          <div class="stat"><div class="num">131</div><div class="lbl">Этнос и народность</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NATURE ============ -->
+<section class="section section--night" id="nature">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">Природа</span>
+      <h2>Земля контрастов</h2>
+      <p>Шесть стихий одной страны — от красных каньонов до зеркальных горных озёр.</p>
+    </div>
+
+    <div class="card-grid" id="natureGrid">
+      <!-- cards injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ CULTURE ============ -->
+<section class="section section--paper" id="culture">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">Культура и наследие</span>
+      <h2>Голос кочевья</h2>
+      <p>Быт, в котором каждый предмет — и вещь, и символ. Дом, который умещается на спине верблюда.</p>
+    </div>
+    <div class="card-grid" id="cultureGrid"></div>
+  </div>
+</section>
+
+<!-- ============ SYMBOLS ============ -->
+<section class="section section--night" id="symbols">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">Символы страны</span>
+      <h2>Семь знаков земли</h2>
+      <p>То, что Казахстан подарил миру — и то, что мир узнаёт в Казахстане.</p>
+    </div>
+    <div class="symbol-grid" id="symbolGrid"></div>
+  </div>
+</section>
+
+<!-- ============ CITIES ============ -->
+<section class="section section--night" id="cities">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">Современные города</span>
+      <h2>Степь, ставшая городом</h2>
+    </div>
+    <div class="card-grid" id="citiesGrid"></div>
+  </div>
+</section>
+
+<!-- ============ HISTORY TIMELINE ============ -->
+<section class="section section--paper" id="history">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">Линия истории</span>
+      <h2>Тысячелетия в степи</h2>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<!-- ============ CUISINE ============ -->
+<section class="section section--night" id="cuisine">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">Кухня</span>
+      <h2>Дастархан гостеприимства</h2>
+      <p>Стол кочевника — это щедрость, возведённая в традицию.</p>
+    </div>
+    <div class="food-grid" id="foodGrid"></div>
+  </div>
+</section>
+
+<!-- ============ MUSIC ============ -->
+<section class="section section--paper" id="music">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">Музыка</span>
+      <h2>Две струны, целый мир</h2>
+    </div>
+    <div class="music-wrap">
+      <div data-reveal>
+        <p class="lead">Домбра — сердце казахской музыки. Всего две струны, но в руках мастера-күйши они рассказывают историю целого народа без единого слова.</p>
+        <p>Күй — инструментальная поэма, в которой звучит и топот табунов, и вой степного ветра, и тоска расставаний. Великий Курмангазы превратил эту форму в высокое искусство. Национальный праздник — <strong>День домбры</strong> — отмечают каждое первое воскресенье июля.</p>
+      </div>
+      <div class="kuy-list" id="kuyList" data-reveal data-reveal-delay="1"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GAMES & TRADITIONS ============ -->
+<section class="section section--night" id="games">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">Игры и традиции</span>
+      <h2>Степь как арена</h2>
+      <p>Конь, ловкость и азарт — национальные игры, рождённые в седле.</p>
+    </div>
+    <div class="symbol-grid" id="gamesGrid"></div>
+  </div>
+</section>
+
+<!-- ============ NAME MORPH ============ -->
+<section class="section section--paper" id="name">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">Интерактив · Имя</span>
+      <h2>Одно имя, три написания</h2>
+      <p>Qazaqstan, Kazakstan, Kazakhstan — одно слово на пути от кириллицы к латинице.</p>
+    </div>
+    <div class="namemorph" data-reveal>
+      <div class="morph" id="morphWord">Qazaqstan</div>
+      <div class="switch-row" id="morphSwitch">
+        <button data-word="Qazaqstan" class="active">Qazaqstan</button>
+        <button data-word="Kazakstan">Kazakstan</button>
+        <button data-word="Kazakhstan">Kazakhstan</button>
+      </div>
+      <p style="max-width:640px;margin:34px auto 0" class="lead">
+        Казахский язык переходит на латиницу — это возвращение к более точной передаче родных звуков.
+        «Qazaq» с буквой Q ближе к оригинальному степному произношению, чем привычное английское «Kazakh».
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM ============ -->
+<section class="section section--night" id="instagram">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">@kazakstan</span>
+      <h2>Степь в кадре</h2>
+    </div>
+    <div class="ig-grid" id="igGrid"></div>
+    <div style="text-align:center;margin-top:40px" data-reveal>
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="btn btn--ghost">
+        View on Instagram
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL ============ -->
+<section class="section final" id="final">
+  <div class="final__pattern" id="finalPattern"></div>
+  <div class="wrap">
+    <div class="ornament-divider" data-reveal style="margin:0 auto 30px">
+      <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+    </div>
+    <h2 data-reveal data-reveal-delay="1">Kazakstan</h2>
+    <p class="credo" data-reveal data-reveal-delay="2">Heritage. Identity. Continuity.</p>
+  </div>
+</section>
+
+<!-- ============ CREDITS ============ -->
+<section class="section section--night" id="credits">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ornament-divider" data-reveal>
+        <span class="line"></span><svg><use href="#orn-ram"/></svg><span class="line"></span>
+      </div>
+      <span class="kicker">Источники · Credits</span>
+      <h2>Что стоит за словами</h2>
+    </div>
+    <div class="credits-grid">
+      <div data-reveal>
+        <h4>Знание</h4>
+        <ul>
+          <li>Энциклопедия «Қазақстан»</li>
+          <li>Институт истории и этнологии им. Ч. Валиханова</li>
+          <li>ЮНЕСКО — Шёлковый путь</li>
+          <li>Национальный музей РК</li>
+        </ul>
+      </div>
+      <div data-reveal data-reveal-delay="1">
+        <h4>Визуальный материал</h4>
+        <ul>
+          <li>Атмосферные изображения — генерация (Higgsfield)</li>
+          <li>Слоты под лицензионную фотосъёмку</li>
+          <li>Орнамент ою-өрнек — авторская графика</li>
+        </ul>
+      </div>
+      <div data-reveal data-reveal-delay="2">
+        <h4>Принципы</h4>
+        <ul>
+          <li>Культура, а не реклама</li>
+          <li>Точность важнее эффекта</li>
+          <li>Уважение к первоисточнику</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="display">Kazakstan</span>
+        <p>Цифровой музей и мини-энциклопедия о Казахстане — земле свободного народа Великой степи.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Разделы</h4>
+        <a href="#about">О названии</a>
+        <a href="#nature">Природа</a>
+        <a href="#culture">Культура</a>
+        <a href="#history">История</a>
+        <a href="#cuisine">Кухня</a>
+      </div>
+      <div class="footer-col">
+        <h4>Связь</h4>
+        <a href="mailto:hello@kazakstan.org">hello@kazakstan.org</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="#">kazakstan.org</a>
+      </div>
+    </div>
+
+    <div class="footer-sister">
+      <div>
+        <div class="label">Қазақ тіліндегі нұсқа · казахоязычная версия</div>
+        <div class="name">Qazaqstan.org</div>
+      </div>
+      <a href="#" class="btn btn--ghost">Қазақша оқу
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Kazakstan · Сандық мұражай</span>
+      <span>Сделано с уважением к Великой степи</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MODAL ============ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal__panel">
+    <div class="modal__hero placeholder" id="modalHero">
+      <button class="modal__close" id="modalClose" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <span class="modal__cat" id="modalCat">Категория</span>
+      <h3 id="modalTitle">Заголовок</h3>
+      <div class="modal-text" id="modalText"></div>
+      <div class="modal__facts">
+        <h5>Знаете ли вы</h5>
+        <p id="modalFact"></p>
+      </div>
+      <div class="modal__map">
+        <span class="pin" id="modalPin" style="top:50%;left:50%"></span>
+        <span class="map-label" id="modalMapLabel">Казахстан</span>
+      </div>
+      <div class="modal__actions">
+        <button class="btn btn--gold" id="modalAudio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4V5zM16 9a4 4 0 0 1 0 6M19 7a8 8 0 0 1 0 10"/></svg>
+          Слушать степь
+        </button>
+        <span style="font-size:13px;color:var(--fg-muted)">Аудио подставляется кодом</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<script src="js/content.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
