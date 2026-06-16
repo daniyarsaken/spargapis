@@ -792,31 +792,6 @@ html.has-gsap .name-meaning .big-word { will-change: transform; }
 .section.has-bg .symbol { background: rgba(11, 22, 34, 0.45); backdrop-filter: blur(3px); }
 .section.has-bg .kuy { background: rgba(11, 22, 34, 0.40); backdrop-filter: blur(3px); }
 
-/* =================================================================
-   THE EAGLE — a single character flying through the whole site
-   (continuous wing-flap + scroll-driven serpentine flight path)
-   ================================================================= */
-.eagle-layer {
-  position: fixed; inset: 0; z-index: 50;
-  pointer-events: none; overflow: hidden;
-}
-.eagle {
-  position: absolute; left: 0; top: 0;
-  width: clamp(120px, 14vw, 250px);
-  opacity: 0;
-  will-change: transform, opacity;
-  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.45));
-}
-.eagle__frames { position: relative; width: 100%; aspect-ratio: 3 / 2; }
-.eagle__f {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: contain;
-  opacity: 0;
-}
-.eagle__f.on { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { .eagle-layer { display: none; } }
-@media (hover: none) and (max-width: 720px) { .eagle { width: 104px; } }
 
 /* stronger, clearly-visible Ken Burns motion on section backgrounds */
 .section-bg__img { animation-duration: 24s; }
