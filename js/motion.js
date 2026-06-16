@@ -170,6 +170,17 @@
       });
     });
 
+    /* ---------- Full-bleed section backgrounds: scroll parallax ---------- */
+    $$('.section-bg').forEach((bg) => {
+      const pan = bg.querySelector('.section-bg__pan');
+      const sec = bg.closest('.section');
+      if (!pan || !sec) return;
+      gsap.fromTo(pan, { yPercent: -9 }, {
+        yPercent: 9, ease: 'none',
+        scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: true },
+      });
+    });
+
     // recalc once everything (fonts, injected cards) settled
     window.addEventListener('load', () => ScrollTrigger.refresh());
     setTimeout(() => ScrollTrigger.refresh(), 600);

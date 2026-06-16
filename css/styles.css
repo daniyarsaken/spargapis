@@ -742,3 +742,52 @@ html.has-gsap .ornament-divider[data-reveal] svg { transition: opacity .8s var(-
 
 /* gentle hint that the section name word is interactive on scroll */
 html.has-gsap .name-meaning .big-word { will-change: transform; }
+
+/* =================================================================
+   CINEMATIC SECTION BACKGROUNDS  (scrollytelling)
+   Each storytelling section gets a full-bleed moving image:
+   inner layer = slow Ken Burns (video-like), outer = scroll parallax.
+   ================================================================= */
+.section.has-bg {
+  background: #0b1622;
+  color: var(--paper-100);
+  --fg: var(--paper-100);
+  --fg-muted: rgba(246, 241, 231, 0.68);
+  --line: rgba(201, 180, 140, 0.24);
+}
+.section.has-bg .kicker { color: var(--accent); }
+
+.section-bg { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+.section-bg__pan { position: absolute; inset: -14% 0; will-change: transform; }
+.section-bg__img {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transform-origin: center;
+  animation: kenburns 32s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.section-bg::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(8,14,22,0.86) 0%, rgba(8,14,22,0.55) 26%, rgba(8,14,22,0.58) 72%, rgba(8,14,22,0.92) 100%),
+    radial-gradient(120% 80% at 50% 50%, transparent 40%, rgba(8,14,22,0.55) 100%);
+}
+/* keep all real content above the background */
+.section.has-bg > .wrap,
+.section.has-bg > .final__pattern { position: relative; z-index: 2; }
+
+@keyframes kenburns {
+  0%   { transform: scale(1.06) translate3d(0, 0, 0); }
+  100% { transform: scale(1.20) translate3d(-2.5%, -2%, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-bg__img { animation: none; transform: scale(1.06); }
+}
+
+/* alternate the pan direction so adjacent sections feel distinct */
+.section.has-bg:nth-of-type(even) .section-bg__img { animation-direction: alternate-reverse; }
+
+/* On image sections the translucent component surfaces need a touch more body */
+.section.has-bg .infobox { background: rgba(11, 22, 34, 0.55); backdrop-filter: blur(3px); }
+.section.has-bg .symbol { background: rgba(11, 22, 34, 0.45); backdrop-filter: blur(3px); }
+.section.has-bg .kuy { background: rgba(11, 22, 34, 0.40); backdrop-filter: blur(3px); }

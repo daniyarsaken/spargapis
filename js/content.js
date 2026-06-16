@@ -117,3 +117,23 @@ const DATA = {
       ico:'<path d="M7 8c0-2 1-3 2-3s2 1 2 3-1 3-2 5 1 3 2 3 2-1 2-3M14 16c0 2 1 3 2 3"/>' },
   ],
 };
+
+/* =================================================================
+   SECTION BACKGROUNDS — full-bleed cinematic stills per section.
+   Injected by app.js as moving (Ken Burns + parallax) layers.
+   ================================================================= */
+const SECTION_BG = {
+  about:     CDN + '/hf_20260616_081149_26fecb50-e9d3-4d3c-8002-a10ab1c79656_min.webp', // lone horseman, steppe dawn
+  country:   CDN + '/hf_20260616_081151_d67e13e9-c243-434d-aea9-b9d537ef8494_min.webp', // aerial steppe + river
+  nature:    CDN + '/hf_20260616_081318_bd6e9d59-ed91-494a-ab67-1c3150a30a7f_min.webp', // Tian Shan peaks
+  culture:   CDN + '/hf_20260616_081152_43ab34ad-ff35-45eb-ba04-26291878e3ab_min.webp', // yurt interior / shanyrak
+  symbols:   CDN + '/hf_20260616_081154_11c398c3-48cc-443b-aa78-9801cd945b69_min.webp', // golden eagle, sunset
+  cities:    CDN + '/hf_20260616_081204_5ff01a41-d92b-44e3-b41d-688495bda3a9_min.webp', // Astana daytime skyline
+  history:   CDN + '/hf_20260616_081205_708227be-bfa8-415a-abe1-9e8045d75ca1_min.webp', // Silk Road caravan, dusk
+  cuisine:   CDN + '/hf_20260616_081206_b1fa00fd-af73-4b57-830a-bcc46d1f073d_min.webp', // dastarkhan feast
+  music:     CDN + '/hf_20260616_081208_62081806-b5d7-4932-942b-3c4ba5840e82_min.webp', // dombra close-up
+  games:     CDN + '/hf_20260616_081315_a2fb9fe6-1db5-433a-b27e-b6444a037ec5_min.webp', // kokpar horsemen
+  name:      CDN + '/hf_20260616_062707_78571670-fe69-478c-a490-06a27781485f_min.webp', // steppe dawn (reuse)
+  instagram: CDN + '/hf_20260616_062715_f593d6f6-fa83-4279-af1c-09ecfc69d535_min.webp', // Mangistau (reuse)
+  final:     CDN + '/hf_20260616_062712_308b1a50-0fdc-4db3-8811-c6f734bf670e.png',      // night Astana (reuse)
+};

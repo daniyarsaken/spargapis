@@ -26,6 +26,21 @@
     if (el) el.style.backgroundImage = patternURL;
   });
 
+  /* ---------- Cinematic full-bleed section backgrounds ---------- */
+  if (typeof SECTION_BG !== 'undefined') {
+    Object.entries(SECTION_BG).forEach(([id, url]) => {
+      const sec = document.getElementById(id);
+      if (!sec) return;
+      sec.classList.add('has-bg');
+      const bg = document.createElement('div');
+      bg.className = 'section-bg';
+      bg.setAttribute('aria-hidden', 'true');
+      bg.innerHTML =
+        `<div class="section-bg__pan"><div class="section-bg__img" style="background-image:url('${url}')"></div></div>`;
+      sec.prepend(bg);
+    });
+  }
+
   /* ---------- Corner ornament SVG markup ---------- */
   const corner = (cls) =>
     `<svg class="card__corner ${cls}" viewBox="0 0 24 24"><use href="#orn-corner"/></svg>`;
