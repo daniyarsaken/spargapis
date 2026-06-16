@@ -802,22 +802,21 @@ html.has-gsap .name-meaning .big-word { will-change: transform; }
 }
 .eagle {
   position: absolute; left: 0; top: 0;
-  width: clamp(110px, 13vw, 230px);
+  width: clamp(120px, 14vw, 250px);
   opacity: 0;
   will-change: transform, opacity;
   filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.45));
 }
-.eagle__img {
-  display: block; width: 100%;
-  transform-origin: 50% 45%;
-  animation: eagle-flap 0.85s ease-in-out infinite;
+.eagle__frames { position: relative; width: 100%; aspect-ratio: 3 / 2; }
+.eagle__f {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  opacity: 0;
 }
-@keyframes eagle-flap {
-  0%, 100% { transform: scaleY(1) scaleX(1); }
-  50%      { transform: scaleY(0.86) scaleX(1.02) translateY(2%); }
-}
+.eagle__f.on { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .eagle-layer { display: none; } }
-@media (hover: none) and (max-width: 720px) { .eagle { width: 96px; } }
+@media (hover: none) and (max-width: 720px) { .eagle { width: 104px; } }
 
 /* stronger, clearly-visible Ken Burns motion on section backgrounds */
 .section-bg__img { animation-duration: 24s; }

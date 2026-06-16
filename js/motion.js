@@ -182,32 +182,58 @@
     });
 
     /* ---------- THE EAGLE — one character flying through the whole site ---------- */
-    if (typeof EAGLE_IMG !== 'undefined') {
+    if (typeof EAGLE_FRAMES !== 'undefined' && EAGLE_FRAMES.length) {
       const layer = document.createElement('div');
       layer.className = 'eagle-layer';
       layer.setAttribute('aria-hidden', 'true');
       const eagle = document.createElement('div');
       eagle.className = 'eagle';
-      eagle.innerHTML = `<img class="eagle__img" src="${EAGLE_IMG}" alt="">`;
+      const frames = document.createElement('div');
+      frames.className = 'eagle__frames';
+      const imgs = EAGLE_FRAMES.map((src, i) => {
+        const im = document.createElement('img');
+        im.className = 'eagle__f' + (i === 0 ? ' on' : '');
+        im.src = src; im.alt = ''; im.decoding = 'async';
+        frames.appendChild(im);
+        return im;
+      });
+      eagle.appendChild(frames);
       layer.appendChild(eagle);
       document.body.appendChild(layer);
 
-      const SWOOPS = 6.5;          // how many times it crosses the screen top→bottom
-      let vw = window.innerWidth, vh = window.innerHeight;
-      window.addEventListener('resize', () => { vw = window.innerWidth; vh = window.innerHeight; });
+      // wing-beat: cycle frames like real footage  (up → mid → down → mid)
+      const seq = EAGLE_FRAMES.length >= 3 ? [0, 1, 2, 1] : [0, 1];
+      let si = 0, last = 0;
+      const FRAME_MS = 95;
+      (function flap(t) {
+        if (t - last >= FRAME_MS) {
+          last = t; si = (si + 1) % seq.length;
+          imgs.forEach((im, idx) => im.classList.toggle('on', idx === seq[si]));
+        }
+        requestAnimationFrame(flap);
+      })(0);
+
+      // flight: cross the screen, vanish off one edge, re-enter from the other
+      const CROSS = 5;                          // full left→right passes over the page
+      const heights = [28, 56, 18, 46, 34, 60]; // vary altitude each pass (% of viewport)
+      let vw = innerWidth, vh = innerHeight;
+      addEventListener('resize', () => { vw = innerWidth; vh = innerHeight; });
 
       const place = (p) => {
-        const ang = p * Math.PI * 2 * SWOOPS;
-        const cx = (50 + Math.sin(ang) * 40) / 100 * vw;          // sweep left↔right
-        const cy = (42 + Math.sin(ang * 0.5 + 1) * 22) / 100 * vh; // wander up/down
-        const rot = Math.cos(ang) * 18;                            // bank into the turns
-        const s = 0.78 + (Math.sin(p * Math.PI * 6) * 0.5 + 0.5) * 0.55; // near/far
+        const t = p * CROSS, k = Math.floor(t), frac = t - k;
+        const x = (-24 + frac * 148) / 100 * vw;                 // -24%..124%  (off-screen ↔ off-screen)
+        const h0 = heights[k % heights.length];
+        const h1 = heights[(k + 1) % heights.length];
+        const arc = Math.sin(frac * Math.PI) * -6;               // gentle glide arc
+        const y = (h0 + (h1 - h0) * frac + arc) / 100 * vh;
+        const bank = Math.cos(frac * Math.PI) * -5 + (h1 - h0) * 0.12;
+        const s = 0.92 + Math.sin(p * Math.PI * 4) * 0.12;
         let op = 1;
-        if (p < 0.05) op = Math.max(0, (p - 0.012) / 0.038);       // fly in after hero
-        else if (p > 0.93) op = Math.max(0, (0.985 - p) / 0.055);  // fly out before footer
+        if (p < 0.04) op = Math.max(0, (p - 0.008) / 0.032);
+        else if (p > 0.95) op = Math.max(0, (0.99 - p) / 0.04);
         eagle.style.opacity = op.toFixed(3);
         eagle.style.transform =
-          `translate(${cx}px, ${cy}px) translate(-50%, -50%) rotate(${rot}deg) scale(${s.toFixed(3)})`;
+          `translate(${x}px, ${y}px) translate(-50%, -50%) rotate(${bank.toFixed(2)}deg) scale(${s.toFixed(3)})`;
       };
       place(0);
       ScrollTrigger.create({

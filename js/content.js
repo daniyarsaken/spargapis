@@ -139,5 +139,11 @@ const SECTION_BG = {
 };
 
 /* The eagle — a single character that flies through the entire site.
-   Transparent-background still (Higgsfield + background removal). */
-const EAGLE_IMG = CDN + '/hf_20260616_215530_061f46c1-e1ef-47d2-b41e-f093c3c72611.png';
+   Three transparent wing-beat frames (side profile, facing right), cycled
+   like real footage: wings UP → spread (mid) → DOWN → mid.
+   Higgsfield: seedream base + nano-banana pose variants + background removal. */
+const EAGLE_FRAMES = [
+  CDN + '/hf_20260616_221907_b5c1bde3-a7af-4822-a041-8ed6b0a8d7a9_min.png', // wings up
+  CDN + '/hf_20260616_221911_bd3a4275-a868-4cc9-8479-36c41637286f_min.png', // wings spread (mid)
+  CDN + '/hf_20260616_221914_a4a78257-be55-4459-9649-e2a1d569b1d7_min.png', // wings down
+];
