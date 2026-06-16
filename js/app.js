@@ -6,6 +6,7 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const HAS_GSAP = document.documentElement.classList.contains('has-gsap');
 
   /* ---------- Ornament background pattern (tiled SVG) ---------- */
   const patternSVG = encodeURIComponent(
@@ -124,16 +125,18 @@
     ig.innerHTML = cells;
   }
 
-  /* ---------- Scroll reveal ---------- */
-  if ('IntersectionObserver' in window && !reduce) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-    $$('[data-reveal]').forEach((el) => io.observe(el));
-  } else {
-    $$('[data-reveal]').forEach((el) => el.classList.add('in'));
+  /* ---------- Scroll reveal (skipped when GSAP/motion.js owns it) ---------- */
+  if (!HAS_GSAP) {
+    if ('IntersectionObserver' in window && !reduce) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      $$('[data-reveal]').forEach((el) => io.observe(el));
+    } else {
+      $$('[data-reveal]').forEach((el) => el.classList.add('in'));
+    }
   }
 
   /* ---------- Preloader + hero entrance ---------- */
@@ -143,9 +146,16 @@
     if (preloader) preloader.classList.add('done');
     if (hero) hero.classList.add('ready');
   }
-  window.addEventListener('load', () => setTimeout(launch, reduce ? 0 : 1500));
-  // safety: never trap behind a slow asset
-  setTimeout(launch, 3200);
+  // exposed so motion.js can fall back to a static reveal on any failure
+  window.__revealAll = function () {
+    launch();
+    $$('[data-reveal]').forEach((el) => el.classList.add('in'));
+  };
+  if (!HAS_GSAP) {
+    window.addEventListener('load', () => setTimeout(launch, reduce ? 0 : 1500));
+    // safety: never trap behind a slow asset
+    setTimeout(launch, 3200);
+  }
 
   /* ---------- Header scroll state ---------- */
   const header = $('#header');
@@ -155,7 +165,7 @@
 
   /* ---------- Parallax hero ---------- */
   const heroBg = $('#heroBg');
-  if (heroBg && !reduce) {
+  if (heroBg && !reduce && !HAS_GSAP) {
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       if (y < window.innerHeight) {
