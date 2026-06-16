@@ -791,3 +791,37 @@ html.has-gsap .name-meaning .big-word { will-change: transform; }
 .section.has-bg .infobox { background: rgba(11, 22, 34, 0.55); backdrop-filter: blur(3px); }
 .section.has-bg .symbol { background: rgba(11, 22, 34, 0.45); backdrop-filter: blur(3px); }
 .section.has-bg .kuy { background: rgba(11, 22, 34, 0.40); backdrop-filter: blur(3px); }
+
+/* =================================================================
+   THE EAGLE — a single character flying through the whole site
+   (continuous wing-flap + scroll-driven serpentine flight path)
+   ================================================================= */
+.eagle-layer {
+  position: fixed; inset: 0; z-index: 50;
+  pointer-events: none; overflow: hidden;
+}
+.eagle {
+  position: absolute; left: 0; top: 0;
+  width: clamp(110px, 13vw, 230px);
+  opacity: 0;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.45));
+}
+.eagle__img {
+  display: block; width: 100%;
+  transform-origin: 50% 45%;
+  animation: eagle-flap 0.85s ease-in-out infinite;
+}
+@keyframes eagle-flap {
+  0%, 100% { transform: scaleY(1) scaleX(1); }
+  50%      { transform: scaleY(0.86) scaleX(1.02) translateY(2%); }
+}
+@media (prefers-reduced-motion: reduce) { .eagle-layer { display: none; } }
+@media (hover: none) and (max-width: 720px) { .eagle { width: 96px; } }
+
+/* stronger, clearly-visible Ken Burns motion on section backgrounds */
+.section-bg__img { animation-duration: 24s; }
+@keyframes kenburns {
+  0%   { transform: scale(1.05) translate3d(3%, 2%, 0); }
+  100% { transform: scale(1.28) translate3d(-4%, -3%, 0); }
+}

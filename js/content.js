@@ -137,3 +137,7 @@ const SECTION_BG = {
   instagram: CDN + '/hf_20260616_062715_f593d6f6-fa83-4279-af1c-09ecfc69d535_min.webp', // Mangistau (reuse)
   final:     CDN + '/hf_20260616_062712_308b1a50-0fdc-4db3-8811-c6f734bf670e.png',      // night Astana (reuse)
 };
+
+/* The eagle — a single character that flies through the entire site.
+   Transparent-background still (Higgsfield + background removal). */
+const EAGLE_IMG = CDN + '/hf_20260616_215530_061f46c1-e1ef-47d2-b41e-f093c3c72611.png';

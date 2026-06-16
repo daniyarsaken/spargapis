@@ -175,11 +175,47 @@
       const pan = bg.querySelector('.section-bg__pan');
       const sec = bg.closest('.section');
       if (!pan || !sec) return;
-      gsap.fromTo(pan, { yPercent: -9 }, {
-        yPercent: 9, ease: 'none',
+      gsap.fromTo(pan, { yPercent: -16 }, {
+        yPercent: 16, ease: 'none',
         scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: true },
       });
     });
+
+    /* ---------- THE EAGLE — one character flying through the whole site ---------- */
+    if (typeof EAGLE_IMG !== 'undefined') {
+      const layer = document.createElement('div');
+      layer.className = 'eagle-layer';
+      layer.setAttribute('aria-hidden', 'true');
+      const eagle = document.createElement('div');
+      eagle.className = 'eagle';
+      eagle.innerHTML = `<img class="eagle__img" src="${EAGLE_IMG}" alt="">`;
+      layer.appendChild(eagle);
+      document.body.appendChild(layer);
+
+      const SWOOPS = 6.5;          // how many times it crosses the screen top→bottom
+      let vw = window.innerWidth, vh = window.innerHeight;
+      window.addEventListener('resize', () => { vw = window.innerWidth; vh = window.innerHeight; });
+
+      const place = (p) => {
+        const ang = p * Math.PI * 2 * SWOOPS;
+        const cx = (50 + Math.sin(ang) * 40) / 100 * vw;          // sweep left↔right
+        const cy = (42 + Math.sin(ang * 0.5 + 1) * 22) / 100 * vh; // wander up/down
+        const rot = Math.cos(ang) * 18;                            // bank into the turns
+        const s = 0.78 + (Math.sin(p * Math.PI * 6) * 0.5 + 0.5) * 0.55; // near/far
+        let op = 1;
+        if (p < 0.05) op = Math.max(0, (p - 0.012) / 0.038);       // fly in after hero
+        else if (p > 0.93) op = Math.max(0, (0.985 - p) / 0.055);  // fly out before footer
+        eagle.style.opacity = op.toFixed(3);
+        eagle.style.transform =
+          `translate(${cx}px, ${cy}px) translate(-50%, -50%) rotate(${rot}deg) scale(${s.toFixed(3)})`;
+      };
+      place(0);
+      ScrollTrigger.create({
+        trigger: document.body, start: 'top top', end: 'bottom bottom',
+        onUpdate: (self) => place(self.progress),
+        onRefresh: (self) => place(self.progress),
+      });
+    }
 
     // recalc once everything (fonts, injected cards) settled
     window.addEventListener('load', () => ScrollTrigger.refresh());
