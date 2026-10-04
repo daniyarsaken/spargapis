@@ -121,4 +121,4 @@ function appIcon() {
   );
 }
 
-module.exports = { trayIcon, appIcon, encodePng };
+module.exports = { trayIcon, appIcon, encodePng, rasterize, markShapes };

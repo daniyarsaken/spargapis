@@ -9,12 +9,62 @@
   "scripts": {
     "start": "electron .",
     "check": "node scripts/check.js",
-    "smoke": "ORBITA_SMOKE=1 ORBITA_USER_DATA=$(mktemp -d) electron ."
+    "smoke": "ORBITA_SMOKE=1 ORBITA_USER_DATA=$(mktemp -d) electron .",
+    "icon": "node scripts/make-icon.js",
+    "dist:win": "node scripts/make-icon.js && electron-builder --win nsis --x64 --publish never"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.131.0"
   },
   "devDependencies": {
-    "electron": "^44.5.1"
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3"
+  },
+  "author": "Orbita",
+  "build": {
+    "appId": "app.orbita.assistant",
+    "productName": "Орбита",
+    "executableName": "Orbita",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**",
+      "renderer/**",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "Orbita-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Орбита",
+      "uninstallDisplayName": "Орбита",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false,
+      "installerLanguages": [
+        "ru_RU"
+      ],
+      "language": "1049",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico"
+    },
+    "publish": null
   }
 }

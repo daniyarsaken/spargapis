@@ -38,6 +38,7 @@ let pendingNav = null;
 const smokeMode = Boolean(process.env.ORBITA_SMOKE);
 
 app.setName('Орбита');
+if (process.platform === 'win32') app.setAppUserModelId('app.orbita.assistant'); // taskbar grouping, notifications
 if (process.env.ORBITA_USER_DATA) app.setPath('userData', process.env.ORBITA_USER_DATA);
 
 if (!app.requestSingleInstanceLock()) {
