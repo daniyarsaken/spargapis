@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
+  <title>Орбита</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="tray.css">
+</head>
+<body>
+  <div class="tray" id="tray">
+    <div class="tiles">
+      <button class="tile wide" id="askTile">
+        <span class="mark big" aria-hidden="true"></span>
+        <span class="tile-text"><strong>Спросить Орбиту</strong><small id="askHint"></small></span>
+      </button>
+      <button class="tile" id="windowTile" role="switch"></button>
+      <button class="tile" id="clipboardTile" role="switch"></button>
+      <button class="tile" id="dndTile" role="switch"></button>
+      <button class="tile" id="loginTile" role="switch"></button>
+    </div>
+
+    <div class="card recent">
+      <span class="card-title">Недавние</span>
+      <div id="recent"></div>
+    </div>
+
+    <div class="menu">
+      <button class="menu-item" id="openApp"><span>Открыть Орбиту…</span><span class="kbd-slot" id="openKeys"></span></button>
+      <button class="menu-item" id="openSettings"><span>Настройки…</span></button>
+      <button class="menu-item" id="quit"><span>Выйти</span></button>
+    </div>
+  </div>
+  <script type="module" src="tray.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
+  <title>Орбита</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <nav class="sidebar" aria-label="Навигация">
+      <div class="titlebar-space"></div>
+
+      <div class="side-section" id="sideChat">
+        <div class="side-top">
+          <div class="search">
+            <span id="searchIcon"></span>
+            <label class="sr" for="search">Поиск по разговорам</label>
+            <input id="search" type="search" placeholder="Поиск" autocomplete="off">
+          </div>
+          <button class="icon-btn" id="newChatBtn" aria-label="Новый разговор"></button>
+        </div>
+        <div class="conv-list" id="convList"></div>
+      </div>
+
+      <div class="side-section" id="sideSettings" hidden>
+        <button class="side-back" id="backToChat"><span id="backIcon"></span>Вернуться к чату</button>
+        <div class="settings-nav" id="settingsNav"></div>
+      </div>
+
+      <button class="side-link" id="settingsLink"><span id="gearIcon"></span>Настройки</button>
+    </nav>
+
+    <main class="chat" id="chatView">
+      <header class="chat-head">
+        <div class="head-text">
+          <h1 id="chatTitle">Новый разговор</h1>
+          <span id="chatSub"></span>
+        </div>
+        <button class="icon-btn" id="deleteBtn" aria-label="Удалить разговор" hidden></button>
+        <button class="icon-btn" id="infoBtn" aria-label="Показать или скрыть сведения"></button>
+      </header>
+
+      <div class="messages" id="messages">
+        <div class="messages-inner" id="messagesInner"></div>
+      </div>
+
+      <div class="composer-wrap">
+        <div class="attachments" id="attachments"></div>
+        <form class="composer" id="composer">
+          <button class="icon-btn round soft" type="button" id="attachBtn" aria-label="Прикрепить файл"></button>
+          <label class="sr" for="input">Сообщение</label>
+          <textarea id="input" rows="1" placeholder="Спросите Орбиту"></textarea>
+          <button class="icon-btn round filled" type="submit" id="sendBtn" aria-label="Отправить"></button>
+        </form>
+        <p class="composer-note" id="composerNote"></p>
+      </div>
+    </main>
+
+    <aside class="info" id="info" aria-label="Сведения о разговоре">
+      <h2>Сведения</h2>
+      <div class="info-block" id="infoFiles"></div>
+      <div class="info-block" id="infoMemory"></div>
+    </aside>
+
+    <main class="settings" id="settingsView" hidden>
+      <div class="settings-inner" id="settingsInner"></div>
+    </main>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "orbita",
+  "productName": "Орбита",
+  "version": "0.1.0",
+  "description": "Орбита — личный ИИ-ассистент для рабочего стола",
+  "main": "main.js",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "check": "node scripts/check.js",
+    "smoke": "ORBITA_SMOKE=1 ORBITA_USER_DATA=$(mktemp -d) electron ."
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.131.0"
+  },
+  "devDependencies": {
+    "electron": "^44.5.1"
+  }
+}

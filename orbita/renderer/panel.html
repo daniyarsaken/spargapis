@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
+  <title>Орбита</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <div class="panel" id="panel">
+    <div class="search-row" id="searchRow">
+      <span class="mark" aria-hidden="true"></span>
+      <label class="sr" for="q">Запрос к Орбите</label>
+      <input id="q" type="text" autocomplete="off" spellcheck="false" placeholder="Спросите Орбиту">
+    </div>
+
+    <div class="answer-head" id="answerHead" hidden>
+      <span class="mark small" aria-hidden="true"></span>
+      <span class="answer-query" id="answerQuery"></span>
+      <button class="icon-btn round close" id="backBtn" aria-label="Назад к предложениям"></button>
+    </div>
+
+    <div class="sep"></div>
+
+    <section class="home" id="home">
+      <div class="chips" id="chips"></div>
+      <div class="list" id="list" role="listbox" aria-label="Предложения"></div>
+    </section>
+
+    <section class="answer" id="answer" hidden>
+      <div class="answer-scroll" id="answerScroll">
+        <div class="answer-source" id="answerSource"></div>
+        <div class="md" id="answerBody"></div>
+        <div class="status" id="answerStatus" hidden></div>
+      </div>
+      <div class="actions" id="actions">
+        <button class="pill primary" id="insertBtn">Вставить в окно <span class="hint" id="insertHint"></span></button>
+        <button class="pill" id="copyBtn">Копировать</button>
+        <button class="pill" id="chatBtn">Открыть в чате</button>
+        <span class="grow"></span>
+        <button class="icon-btn round soft" id="retryBtn" aria-label="Ответить заново"></button>
+      </div>
+      <form class="refine" id="refineForm">
+        <label class="sr" for="refine">Уточнить запрос</label>
+        <input id="refine" type="text" autocomplete="off" placeholder="Уточнить: «короче», «на английском», «письмом»">
+        <button class="icon-btn round filled" id="refineBtn" type="submit" aria-label="Отправить уточнение"></button>
+      </form>
+    </section>
+
+    <footer class="foot" id="foot">
+      <span class="foot-note"><span id="lockIcon"></span>Память хранится на этом компьютере</span>
+      <span class="foot-keys" id="footKeys"></span>
+    </footer>
+  </div>
+  <script type="module" src="panel.js"></script>
+</body>
+</html>
